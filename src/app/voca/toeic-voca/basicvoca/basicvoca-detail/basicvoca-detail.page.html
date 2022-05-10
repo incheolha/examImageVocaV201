@@ -1,0 +1,68 @@
+
+<ion-content>
+  <div class="main_content_div">
+
+    <ion-buttons slot="start">
+
+        <ion-menu-button color="light" class="menu_btn"><ion-icon name="apps"></ion-icon></ion-menu-button>
+
+    </ion-buttons>
+
+    <div class="user_div">
+      <div class="first_div">
+        <ion-label class="welcome">Welcome</ion-label>
+        <ion-label class="username">Tony Ha</ion-label>
+      </div>
+      <div class="user_back"></div>
+  </div>
+  </div>
+<swiper #swiper [config]="config"
+        (slideChange)="swiperSlideChanged($event)"
+>
+  <ng-template swiperSlide *ngFor="let voca of dailyVoca; let i = index;">
+
+    <ion-card class="ion-no-padding">
+      <ion-card-header>
+        <ion-img role="button"
+                (click)="imageTaps(i)"
+                src="assets/imageVoca/png/{{voca.filename}}.png">
+        </ion-img>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-title class="ion-margin-bottom">
+              {{ voca.enWord }} [{{voca.pronunciation}}]
+        </ion-card-title>
+        <ion-card-subtitle >{{ voca.korDefinition }}</ion-card-subtitle>
+
+
+        <ion-card-subtitle class="ion-margin-top">유의어: {{ voca.enSynonyms }}</ion-card-subtitle>
+
+        <ion-card-subtitle>반대어: {{ voca.enAntonyms }}</ion-card-subtitle>
+
+        <ion-card-subtitle class="ion-margin-top">{{ voca.enExample }}</ion-card-subtitle>
+
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+
+</swiper>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col size="4">
+      <ion-button expand="full" (click)="prev()">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button expand="full" (click)="toggleTouch()">
+        <ion-icon name="lock-open-outline"></ion-icon>
+      </ion-button>
+    </ion-col>    <ion-col size="4">
+      <ion-button expand="full" (click)="next()">
+        <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

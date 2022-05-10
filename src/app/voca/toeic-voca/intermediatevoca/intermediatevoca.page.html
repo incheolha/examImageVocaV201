@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/exam/toeic"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Intermediate Voca</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+    <ion-list>
+      <ion-item *cdkVirtualFor="let item of intermediateVocas">
+        <ion-label>{{ item.enWord }}</ion-label>
+      </ion-item>
+    </ion-list>>
+  </cdk-virtual-scroll-viewport>
+</ion-content>

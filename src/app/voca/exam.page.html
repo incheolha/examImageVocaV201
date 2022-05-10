@@ -1,0 +1,190 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-menu-button><ion-icon name="apps"></ion-icon></ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="bordered" fill="solid" color="light" (click)="onAlram()">
+        <ion-icon color="primary" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img src="assets/images/haheemang.jpg">
+    </ion-avatar>
+    <ion-label>
+      <h1>HeeMang, Ha</h1>
+      <h3>Gosan-Ro, Gunpo, South Korea</h3>
+    </ion-label>
+  </ion-item>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="title-position">
+    <div class="action-button">
+      <ion-button size="small" color="secondary" fill="solid" (click)="onDashboard()">
+        <ion-label>Dashboard</ion-label>
+      </ion-button>
+      <ion-button size="small" color="success" fill="solid" (click)="onLevelTest()">
+        <ion-label>Level Test</ion-label>
+      </ion-button>
+
+    </div>
+  </div>
+  <div class="action-button">
+    <ion-button class="Secondary" fill="solid" >
+      <ion-label>Exam Image Voca</ion-label>
+    </ion-button>
+  </div>
+  <ion-grid fixed>
+
+    <ion-row>
+      <ion-col size="6" (click)="goToSubject(i)" *ngFor="let item of subject; let i = index;">
+        <div class="col_div">
+          <img src="{{ item.img }}">
+          <ion-label>{{ item.name }}</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+      <ion-col size="6" class="ion-text-center">
+        <ion-card >
+          <ion-card-header class="ion-no-padding">
+            <ion-item lines="none" >
+              <ion-avatar slot="start">
+                <img src="assets/images/abandon.png">
+              </ion-avatar>
+
+              <h6>Toeic</h6>
+            </ion-item>
+
+          </ion-card-header>
+          <ion-card-content>
+            <div class="start-button">
+              <ion-card-subtitle>this is a sample</ion-card-subtitle>
+              <ion-button class="ion-no-margin" size="small" fill="outline"
+                          (click)="onToeic()"
+              >Start</ion-button>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-card >
+          <ion-card-header class="ion-no-padding">
+            <ion-item lines="none" >
+              <ion-avatar slot="start">
+                <img src="assets/images/absolute.png">
+              </ion-avatar>
+
+              <h6>Toefl</h6>
+            </ion-item>
+
+          </ion-card-header>
+          <ion-card-content>
+            <div class="start-button">
+              <ion-card-subtitle>this is a sample</ion-card-subtitle>
+              <ion-button class="ion-no-margin" size="small" fill="outline" (click)="onToefl()">Start</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-card >
+          <ion-card-header class="ion-no-padding">
+            <ion-item lines="none" >
+              <ion-avatar slot="start">
+                <img src="assets/images/abandon.png">
+              </ion-avatar>
+
+              <h6>수능단어</h6>
+            </ion-item>
+
+          </ion-card-header>
+          <ion-card-content>
+            <div class="start-button">
+              <ion-card-subtitle>this is a sample</ion-card-subtitle>
+              <ion-button class="ion-no-margin" size="small" fill="outline" (click)="onKoreanSAT()">Start</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-card >
+          <ion-card-header class="ion-no-padding">
+            <ion-item lines="none" >
+              <ion-avatar slot="start">
+                <img src="assets/images/abbreviate.png">
+              </ion-avatar>
+
+              <h6>고등단어</h6>
+            </ion-item>
+
+          </ion-card-header>
+          <ion-card-content>
+            <div class="start-button">
+              <ion-card-subtitle>this is a sample</ion-card-subtitle>
+              <ion-button class="ion-no-margin" size="small" fill="outline" (click)="onKoreanHS()">Start</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-card >
+          <ion-card-header class="ion-no-padding">
+            <ion-item lines="none" >
+              <ion-avatar slot="start">
+                <img src="assets/images/abolish.png">
+              </ion-avatar>
+
+              <h6>중등단어</h6>
+            </ion-item>
+
+          </ion-card-header>
+          <ion-card-content>
+            <div class="start-button">
+              <ion-card-subtitle>this is a sample</ion-card-subtitle>
+              <ion-button class="ion-no-margin" size="small" fill="outline" (click)="onKoreanMS()">Start</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-card >
+          <ion-card-header class="ion-no-padding">
+            <ion-item lines="none" >
+              <ion-avatar slot="start">
+                <img src="assets/images/abound.png">
+              </ion-avatar>
+
+              <h6>레벨시험</h6>
+
+            </ion-item>
+
+          </ion-card-header>
+          <ion-card-content>
+            <div class="start-button">
+              <ion-card-subtitle>this is a sample</ion-card-subtitle>
+              <ion-button class="ion-no-margin" size="small" fill="outline" (click)="onLevelTest()">Start</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row> -->
+
+  </ion-grid>
+</ion-content>

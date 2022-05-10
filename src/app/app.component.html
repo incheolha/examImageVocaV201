@@ -1,0 +1,59 @@
+<ion-app>
+
+  <ion-menu contentId="main">
+    <ion-content>
+      <div class="menu-header-background">
+      </div>
+      <div class="header-content">
+        <img src="../assets/images/haheemang.jpg">
+        <ion-label>
+          <h2>Dr. Tony Ha</h2>
+          <p>Information Analytics</p>
+        </ion-label>
+    </div>
+
+    <div class="action-button">
+      <ion-buttons slot="start">
+        <ion-button color="primary" fill="solid" [routerLink]="['tabs/dashboard']">
+          <ion-icon name="add"></ion-icon> Dashboard
+        </ion-button>
+      </ion-buttons>
+    </div>
+    <ion-menu-toggle auto-hide="false">
+    <ion-list class="menu-items" lines="none">
+
+      <ion-item routerDirection="root" [routerLink]="['/']" routerLinkActive="selected">
+
+        <ion-icon name="pie-chart-outline"></ion-icon> Home
+      </ion-item >
+
+      <ion-item [routerLink]="['tabs/exam/toeic']" routerLinkActive="selected">
+
+        <ion-icon name="pie-chart-outline"></ion-icon> 토익단어
+      </ion-item >
+      <ion-item [routerLink]="['tabs/exam/toefl']" routerLinkActive="selected">
+        <ion-icon name="browsers-outline"></ion-icon> 토플단어
+      </ion-item>
+      <ion-item [routerLink]="['tabs/exam/koreanSAT']" routerLinkActive="selected">
+        <ion-icon name="flash-outline"></ion-icon> 수능단어
+      </ion-item>
+      <ion-item [routerLink]="['tabs/exam/koreanHS']" routerLinkActive="selected">
+        <ion-icon name="chatbubble-ellipses-outline"></ion-icon> 고등단어
+      </ion-item>
+      <ion-item [routerLink]="['tabs/exam/koreanMS']" routerLinkActive="selected">
+        <ion-icon name="heart-outline"></ion-icon> 중학단어
+      </ion-item>
+      <ion-item [routerLink]="['tabs/leveltest']" routerLinkActive="selected">
+        <ion-icon name="heart-outline"></ion-icon> 단어레벨 점검시험
+      </ion-item>
+      <ion-item [routerLink]="['/']" routerLinkActive="selected">
+        <ion-icon name="exit-outline"></ion-icon> Log Out
+      </ion-item>
+
+    </ion-list>
+    </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

@@ -1,0 +1,7 @@
+{
+  "name": "examImageVocaIonicV200",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

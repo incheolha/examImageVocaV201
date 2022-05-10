@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="main_content_div">
+    <ion-buttons slot="start" class="top_btn">
+      <ion-button color="light" size="large" class="menu_btn" (click)="onBack()"><ion-icon name="arrow-back-circle-outline"></ion-icon></ion-button>
+      <ion-button color="light" class="menu_btn1"><ion-icon name="settings"></ion-icon></ion-button>
+    </ion-buttons>
+
+
+    <div class="user_div">
+      <div class="first_div">
+        <ion-label class="welcome">Welcome</ion-label>
+        <ion-label class="username">Tony Ha</ion-label>
+      </div>
+      <div class="user_back" [style.backgroundImage]="'url(assets/images/haheemang.jpg)'">
+      </div>
+
+    </div>
+
+    <div class="content_div">
+      <ion-label class="hello_label">Exam Image Voca</ion-label>
+    </div>
+  </div>
+      <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+        <ion-list>
+          <ion-item *cdkVirtualFor="let item of basicChapterList; let i = index">
+           <ion-item
+                    lines="none"
+                    [routerLink]="['/', 'tabs', 'exam', 'toeic', 'basicvoca', item.days]"
+                    >
+             <ion-avatar slot="start">
+               <ion-img src="assets/imageVoca/png/{{item.filename}}.png"></ion-img>
+             </ion-avatar>
+             <ion-label>
+               <h2>{{item.days}} Day: {{ item.enWord }}</h2>
+               <ion-progress-bar value="0.5" color="primary"></ion-progress-bar>
+             </ion-label>
+           </ion-item>
+          </ion-item>
+        </ion-list>
+      </cdk-virtual-scroll-viewport>
+
+
+
+</ion-content>
+

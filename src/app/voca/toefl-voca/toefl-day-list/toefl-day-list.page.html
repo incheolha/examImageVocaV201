@@ -1,0 +1,42 @@
+<ion-content>
+  <div class="main_content_div">
+    <ion-buttons slot="start" class="top_btn">
+      <ion-button color="light" size="large" class="menu_btn" (click)="onBack()"><ion-icon name="arrow-back-circle-outline"></ion-icon></ion-button>
+      <ion-button color="light" class="menu_btn1"><ion-icon name="settings"></ion-icon></ion-button>
+    </ion-buttons>
+
+
+    <div class="user_div">
+      <div class="first_div">
+        <ion-label class="welcome">Welcome</ion-label>
+        <ion-label class="username">Tony Ha</ion-label>
+      </div>
+      <div class="user_back" [style.backgroundImage]="'url(assets/images/haheemang.jpg)'">
+      </div>
+
+    </div>
+
+    <div class="content_div">
+      <ion-label class="hello_label">{{ levelTitle }}</ion-label>
+    </div>
+  </div>
+      <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+        <ion-list >
+          <ion-item *cdkVirtualFor="let whatDays of dailyVocaList; let isEven = even; let i = index" [class.even]="isEven" lines="none">
+           <ion-item (click)="onDetailToefl(whatDays)" lines="none">
+             <ion-avatar slot="start">
+               <ion-img src="assets/imageVoca/png/{{whatDays.filename}}.png"></ion-img>
+             </ion-avatar>
+             <ion-label>
+               <h2>{{whatDays.days}} Day: {{ whatDays.enWord }}</h2>
+               <ion-progress-bar value="0.5" color="primary"></ion-progress-bar>
+             </ion-label>
+           </ion-item>
+          </ion-item>
+        </ion-list>
+      </cdk-virtual-scroll-viewport>
+
+
+
+</ion-content>
+

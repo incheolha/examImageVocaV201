@@ -1,0 +1,128 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-button class="bordered" (click)="onBack()" >
+          <ion-icon color="primary" name="arrow-back-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="bordered">
+        <ion-icon color="primary" name="people-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="bordered">
+        <ion-icon color="primary" name="documents-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="bordered" fill="solid" color="light">
+        <ion-icon color="primary" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img src="assets/icon/favicon.png">
+    </ion-avatar>
+    <ion-label>
+      <p>Hello</p>
+      <h3>Tony Ha from South Korea</h3>
+    </ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+
+  <div class="slides ion-margin-bottom">
+
+    <div class="action-button">
+      <ion-button class="Secondary" fill="solid" >
+        <ion-label>Toeic Image Voca</ion-label>
+      </ion-button>
+    </div>
+
+    <swiper #swiper [config]="config" (slideChange)="swiperSlideChanged($event)">
+      <ng-template swiperSlide *ngFor="let level of levelInfos">
+        <ion-card>
+          <ion-card-header>
+            <div class="main">
+              <img [src]= level.companyLogo>
+            </div>
+
+                  <img class="files" [src]=level.levelLogo>
+          </ion-card-header>
+          <ion-card-content class="ion-text-left">
+            <ion-card-title class="ion-margin-bottom">{{ level.levelTitle }}
+
+            </ion-card-title>
+            <div class="action-button">
+              <ion-button size="small" (click)="onToeic(level.id, level.levelTitle)">Start</ion-button>
+            </div>
+
+            <ion-card-subtitle class="ion-text-right">10/50GB</ion-card-subtitle>
+            <ion-progress-bar value="0.5" color="primary"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </ng-template>
+
+    </swiper>
+  </div>
+  <div class="container">
+    <h2>Last Files</h2>
+    <ion-item lines="none">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-buttons>
+                <ion-button color="light" fill="clear">
+                <ion-icon slot="icon-only" name="document"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            </ion-col>
+            <ion-col size="7">
+              <ion-label>
+                <h4>Project PDF</h4>
+                <h6>Drop Box/Docs</h6>
+              </ion-label>
+            </ion-col>
+              <ion-col size="2">
+                <ion-buttons>
+                  <ion-button color="light" fill="clear">
+                  <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+
+              </ion-col>
+          </ion-row>
+
+        </ion-grid>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">
+            <ion-buttons>
+              <ion-button color="light" fill="clear">
+              <ion-icon slot="icon-only" name="document"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          </ion-col>
+          <ion-col size="7">
+            <ion-label>
+              <h4>Project PDF</h4>
+              <h6>Drop Box/Docs</h6>
+            </ion-label>
+          </ion-col>
+            <ion-col size="2">
+              <ion-buttons>
+                <ion-button color="light" fill="clear">
+                <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+
+            </ion-col>
+        </ion-row>
+
+      </ion-grid>
+  </ion-item>
+
+  </div>
+</ion-content>
