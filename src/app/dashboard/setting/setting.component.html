@@ -1,47 +1,120 @@
-<ion-content>
-  <div class="main_content_div">
-    <ion-buttons slot="start" class="top_btn">
-      <ion-button color="light" size="large" class="menu_btn" (click)="onCancel()"><ion-icon name="arrow-back-circle-outline"></ion-icon></ion-button>
-      <ion-button color="light" class="menu_btn1"><ion-icon name="settings"></ion-icon></ion-button>
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light">
+        <ion-icon name="apps"></ion-icon>
+      </ion-menu-button>
     </ion-buttons>
+    <ion-title>ImageVoca Settings</ion-title>
+    <ion-icon name="settings" slot="end"></ion-icon>
+    <img slot="end" src="../../assets/images/haheemang.jpg" />
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
+  <h4>Global Settings</h4>
+  <ion-list>
+    <ion-item>
+    <ion-label>Image Settings</ion-label>
+    <ion-toggle color="danger"
+                mode="ios"
+                [(ngModel)]="settings.imageSetting"
+                (ionChange)="changeImage($event)"
+                ></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Audio Background Settings</ion-label>
+    <ion-toggle color="danger"
+                mode="ios"
+                [(ngModel)]="settings.audioSetting"
+                (ionChange)="changeAudioBackground($event)"
+                ></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Audio Speed Settings</ion-label>
+      <ion-select mode="ios"
+                  interface="action-sheet"
+                  value="Normal"
+                  okText="Okay"
+                  cancelText="dismiss"
+                  (ionChange)="changeAudioSpeed($event)"
+                  >
+        <ion-select-option value="Very Slow">Very Slow</ion-select-option>
+        <ion-select-option value="Slow">Slow</ion-select-option>
+        <ion-select-option value="Normal">Normal</ion-select-option>
+        <ion-select-option value="Fast">Fast</ion-select-option>
+        <ion-select-option value="Very Fast">Very Fast</ion-select-option>
+      </ion-select>
+  </ion-item>
+</ion-list>
+  <h4>Audio Volume Settings</h4>
+  <ion-list>
+  <ion-item lines="none">
+      <ion-range class="cust-range"
+                 min="0" max="100"
+                 pin="true"
+                 snaps="true"
+                 step="20"
+                 value="60"
+                 color="danger"
+                 (ionChange)="changeAudioVolume($event)"
+                 >
+        <ion-icon slot="start" color="danger" name="volume-mute-outline"></ion-icon>
+        <ion-icon slot="end" color="danger" name="volume-high-outline"></ion-icon>
+      </ion-range>
+    </ion-item>
+  </ion-list>
 
-    <div class="user_div">
-    </div>
-
-    <div class="content_div">
-      <ion-label class="hello_label">Settings</ion-label>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col size-md="12">
-            <ion-card>
-              <ion-card-title>this is sample</ion-card-title>
-              <ion-card-content>this is a sample world</ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+  <h4>Total Test Settings</h4>
+  <ion-list>
+    <ion-item>
+      <ion-label> Total Test Data Initial</ion-label>
+      <ion-toggle color="danger"
+                  mode="ios"
+                  [(ngModel)]="settings.totalTestInitialization"
+                  (ionChange)="changeTotalTest($event)"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <h4>Each Test Settings</h4>
+  <ion-list>
+    <ion-item>
+      <ion-label>Toeic Voca Test Data Initial</ion-label>
+      <ion-toggle color="danger"
+                  mode="ios"
+                  [(ngModel)]="settings.toeicTestInitialization"
+                  (ionChange)="changeToeicTest($event)"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Toefl Test Data Init</ion-label>
+      <ion-toggle color="danger"
+                  mode="ios"
+                  [(ngModel)]="settings.toeflTestInitialization"
+                  (ionChange)="changeToeflTest($event)"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>KR SAT Test Data Initial</ion-label>
+      <ion-toggle color="danger"
+                  mode="ios"
+                  [(ngModel)]="settings.krSatTestInitialization"
+                  (ionChange)="changeKrSatTest($event)"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>MS Test Data Initial</ion-label>
+      <ion-toggle color="danger"
+                  mode="ios"
+                  [(ngModel)]="settings.hsTestInitialization"
+                  (ionChange)="changeHsTest($event)"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>HS Test Data Initial</ion-label>
+      <ion-toggle color="danger"
+                  mode="ios"
+                  [(ngModel)]="settings.msTestInitialization"
+                  (ionChange)="changeMsTest($event)"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <div>
+    <img src="../../assets/images/abound.png" />
   </div>
+  <p>Version 2.0.3</p>
 </ion-content>
-
-<ion-footer>
-  <ion-row>
-    <ion-col size="4">
-      <ion-button expand="full" (click)="prev()">
-        <ion-icon name="arrow-back-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-    <ion-col size="4">
-      <ion-button expand="full" (click)="toggleTouch()">
-        <ion-icon name="lock-open-outline"></ion-icon>
-      </ion-button>
-    </ion-col>    <ion-col size="4">
-      <ion-button expand="full" (click)="next()">
-        <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-</ion-footer>
-
