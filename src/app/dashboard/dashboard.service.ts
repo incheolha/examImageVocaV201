@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
+import { Setting } from '../model/setting.model';
 import * as DashboardMenu from './../data/dashboard/dashboard.data';
 
 @Injectable({
@@ -10,16 +10,21 @@ import * as DashboardMenu from './../data/dashboard/dashboard.data';
 export class DashboardService {
 
 
-    imageSettingSub= new BehaviorSubject<boolean>(false);
-    audioBackgroundSettingSub= new BehaviorSubject<boolean>(false);
-    audioSpeedSettingSub= new BehaviorSubject<string>(null);
-    audioVolumeSettingSub= new BehaviorSubject<string>('60');
-    totalTestInitSub= new BehaviorSubject<boolean>(false);
-    toeicTestInitSub= new BehaviorSubject<boolean>(false);
-    toeflTestInitSub= new BehaviorSubject<boolean>(false);
-    krSatTestInitSub= new BehaviorSubject<boolean>(false);
-    hsTestInitSub= new BehaviorSubject<boolean>(false);
-    msTestInitSub= new BehaviorSubject<boolean>(false);
+  settings: Setting = {
+    imageSetting: false,
+    audioBackgroundSetting: false,
+    swiperSpeedSetting: '300',
+    audioVolumeSetting: '60',
+    totalTestInitialization: false,
+    toeicTestInitialization: false,
+    toeflTestInitialization: false,
+    krSatTestInitialization: false,
+    hsTestInitialization: false,
+    msTestInitialization: false,
+    autoPlayOn: false
+  };
+
+  settingSub = new BehaviorSubject<Setting>(this.settings);
 
   private dashboardMenu = DashboardMenu.DashboardMenu;
 

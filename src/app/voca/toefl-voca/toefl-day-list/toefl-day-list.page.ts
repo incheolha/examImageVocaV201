@@ -1,24 +1,28 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChild, OnDestroy } from '@angular/core';
 import { Route, Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { VocaModalComponent } from '../../shared/voca-modal/voca-modal.component';
 import { ImageVoca } from '../../../model/imageVoca.model';
 import { ToeflVocaService } from '../toefl-voca.service';
-
+import { DashboardService } from '../../../dashboard/dashboard.service';
+import { Setting } from '../../../model/setting.model';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-toefl-day-list',
   templateUrl: './toefl-day-list.page.html',
   styleUrls: ['./toefl-day-list.page.scss'],
 })
-export class ToeflDayListPage implements OnInit {
+export class ToeflDayListPage implements OnInit, OnDestroy {
 
   levelTypeid: string;
   levelTitle: string;
   dailyVocaList: ImageVoca[] = [];
 
+  settingSubscription: Subscription;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private toeflVocaService: ToeflVocaService,
+              private dashBoardService: DashboardService,
               private modalController: ModalController) { }
 
   ngOnInit() {
@@ -29,8 +33,15 @@ export class ToeflDayListPage implements OnInit {
               this.dailyVocaList = this.toeflVocaService.getDayToeflVocas(this.levelTypeid);
               console.log(this.dailyVocaList);
              });
+
+
   }
 
+  ngOnDestroy(): void {
+      if(this.settingSubscription) {
+        this.settingSubscription.unsubscribe();
+      }
+  }
   onBack() {
     console.log('get back to toefl level');
     this.router.navigate(['/tabs/exam/toefl']);
@@ -45,6 +56,7 @@ export class ToeflDayListPage implements OnInit {
         levelTypeId : this.levelTypeid,
         levelTitle : this.levelTitle,
         dayId: whatDays.days
+
       }
     }).then (modalEl => {
       modalEl.present();

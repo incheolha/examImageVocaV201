@@ -4,8 +4,10 @@ import { ModalController } from '@ionic/angular';
 
 import * as DashboardMenu from '../data/dashboard/dashboard.data';
 import { DashboardMenuModel } from '../model/dashboardMenu.model';
+
 import { DashboardService } from './dashboard.service';
 import { SettingComponent } from './setting/setting.component';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -26,13 +28,18 @@ export class DashboardPage implements OnInit {
 
   onBackFromDashBoard()  {
   console.log('back to home');
+
   }
 
   onDashBoard(item) {
     console.log('setting clicked');
-    this.modelController.create({ component: SettingComponent})
-    .then( modelEl => {
-      modelEl.present();
-    });
+    this.modelController.create({ component: SettingComponent,
+                                  componentProps: {
+                                    settingLocation: true
+                                  }
+                                })
+                                .then( modelEl => {
+                                  modelEl.present();
+                                });
   }
 }

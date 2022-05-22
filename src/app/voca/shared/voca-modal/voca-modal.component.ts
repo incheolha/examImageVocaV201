@@ -1,8 +1,15 @@
-import { Component, OnInit, Input, ViewChild, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+
+import { Subscription } from 'rxjs';
+
 import { ToeflVocaService } from '../../toefl-voca/toefl-voca.service';
-import { Router } from '@angular/router';
+import { DashboardService } from '../../../dashboard/dashboard.service';
+
 import { ImageVoca } from '../../../model/imageVoca.model';
+import { Setting } from '../../../model/setting.model';
+import { SettingComponent } from '../../../dashboard/setting/setting.component';
+
 import { Howl, Howler} from 'howler';
 
 // swiper module 등록
@@ -16,7 +23,7 @@ SwiperCore.use([EffectFade, Pagination, Navigation]);
   templateUrl: './voca-modal.component.html',
   styleUrls: ['./voca-modal.component.scss'],
 })
-export class VocaModalComponent implements OnInit {
+export class VocaModalComponent implements OnInit, OnDestroy {
 
   @ViewChild('swiper') swiper: SwiperComponent;
 
@@ -25,20 +32,21 @@ export class VocaModalComponent implements OnInit {
   @Input() levelTypeId: any;
   @Input() levelTitle: any;
 
+  swiperSpeedSet: number;
+  pauseSwiper = false;
+  settings: Setting;
 
   config: SwiperOptions = {
-    autoplay: {
-      delay: 2500,
-  //    disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    pagination: { clickable: true,
-                  dynamicBullets: true },
-    effect: 'coverflow',
-    grabCursor: true
-  };
-
+                               autoplay:  {
+                                              disableOnInteraction: false
+                                           },
+                                slidesPerView: 'auto',
+                                spaceBetween: 30,
+                                pagination: { clickable: true,
+                                              dynamicBullets: true },
+                                effect: 'coverflow',
+                                grabCursor: true
+                          };
 
   touchAllowed = false;
   isFirstIndex = false;
@@ -50,29 +58,66 @@ export class VocaModalComponent implements OnInit {
 
   dailyVocaList: ImageVoca[] = [];
 
+  settingSubScription: Subscription;
 
 
   constructor(private toeflVocaService: ToeflVocaService,
               private alertController: AlertController,
-              private modelController: ModalController) { }
+              private modalController: ModalController,
+              private dashBoardService: DashboardService
+              ) { }
 
   ngOnInit() {
-       //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    console.log('this is after view initialized...');
+
+    this.settingSubScription = this.dashBoardService.settingSub
+                                                    .subscribe( sets => {
+                                                      this.settings = sets;
+                                                      console.log('setting has been changed', this.settings);
+                                                      this.swiperSpeedSet = +(this.settings.swiperSpeedSetting);
+                                                      console.log('Auto Play On:', this.settings.autoPlayOn);
+                                                      if(this.settings.autoPlayOn) {
+                                                        this.swiper.swiperRef.autoplay.start();
+                                                      }
+                                                    });
+
     console.log(this.dayId);                               // list에 지정된 날짜
     console.log(this.levelTypeId);                         // 토플 단계
     console.log(this.levelTitle);
+
     this.dailyVocaList = this.toeflVocaService.getDetailToeflVocas(this.dayId, this.levelTypeId);
     console.log(this.dailyVocaList);
     const imageVocaAudioFileIndex = 0;
     this.onAudioStart(imageVocaAudioFileIndex);
   }
 
+  ngOnDestroy(): void {
+
+    if(this.settingSubScription) {
+      this.settingSubScription.unsubscribe();
+    }
+  }
 
 onCancel() {
-    this.modelController.dismiss();
+    this.modalController.dismiss();
+    this.settings.autoPlayOn = false;
   }
+
+
+onSetting() {
+  console.log('voca modal setting clicked');
+  this.swiper.swiperRef.autoplay.stop();
+  this.modalController.create(
+                      {component: SettingComponent,
+                       componentProps: {
+                         settingLocation: false
+                       }
+                      }
+  ).then ( modalElement => {
+      modalElement.present();
+  });
+
+
+}
 
 onAudioStart(audioFilenameIndex) {
 
@@ -91,6 +136,7 @@ onAudioStart(audioFilenameIndex) {
       },
       onend: () => {
         console.log('On end playing...');
+
       }
     });
 
@@ -98,7 +144,7 @@ onAudioStart(audioFilenameIndex) {
 }
 
 onSwiper(event) {
-  console.log('event clicked', event);
+  console.log('Event clicked', event);
 
   console.log('Is this the first index: ', this.isFirstIndex);
   if (this.isFirstIndex) {
@@ -119,28 +165,30 @@ onSwiper(event) {
 }
 
 swiperSlideChanged(event) {
-  console.log(this.swiper.swiperRef.activeIndex);
-  console.log(event[0].activeIndex);
-
+  console.log('swiper page has been changed: ', event[0].activeIndex);
+  console.log('current swiper Speed: ', this.swiperSpeedSet);
+  this.swiper.swiperRef.params.speed = this.swiperSpeedSet;              //실제 autoplay기능의 delay(speed)값에 영향을 줌
+  console.log(this.swiper.swiperRef.params.speed);
   this.onAudioStart(this.swiper.swiperRef.activeIndex);
 
 }
 
 prev() {
-  this.swiper.swiperRef.slidePrev(500);
+  this.swiper.swiperRef.slidePrev(300);
 
 }
 toggleTouch() {
-  console.log('toggoleTouch', this.touchAllowed);
+  console.log('toggleTouch', this.touchAllowed);
   this.touchAllowed = !this.touchAllowed;
   this.swiper.swiperRef.allowTouchMove = this.touchAllowed;
-  this.swiper
+
 }
 next() {
-  this.swiper.swiperRef.slideNext(500);
+  this.swiper.swiperRef.slideNext(300);
 }
+
 imageTaps(audioIndexNumber) {
-  console.log('this image tapped..');
+  console.log('swiper page내 voca image tapped..');
   this.onAudioStart(audioIndexNumber);
 }
 

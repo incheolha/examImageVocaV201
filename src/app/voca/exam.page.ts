@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Setting } from '../model/setting.model';
 
 @Component({
   selector: 'app-exam',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 export class ExamPage implements OnInit {
 
   subject = [];
+  settings: Setting;
 
   constructor(private router: Router) { }
 
@@ -39,6 +41,7 @@ export class ExamPage implements OnInit {
         name: '레벨테스트'
       }
     ];
+
   }
 
   goToSubject(index) {

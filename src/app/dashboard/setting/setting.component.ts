@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { DashboardService } from '../dashboard.service';
+import { Setting } from '../../model/setting.model';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -8,78 +9,129 @@ import { DashboardService } from '../dashboard.service';
 })
 export class SettingComponent implements OnInit {
 
-  settings: any = {
+  @Input() settingLocation: boolean;                  //dashboard로 부터 들어오면 true가 되고 이럴경우 모든 setting이 활성화된다
+
+
+  settings: Setting = {
     imageSetting: false,
     audioBackgroundSetting: false,
-    audioSpeedSetting: '보통',
+    swiperSpeedSetting: '300',
     audioVolumeSetting: '60',
     totalTestInitialization: false,
     toeicTestInitialization: false,
     toeflTestInitialization: false,
     krSatTestInitialization: false,
     hsTestInitialization: false,
-    msTestInitialization: false
+    msTestInitialization: false,
+    autoPlayOn: false
   };
-
-
   constructor(private modalController: ModalController,
               private dashboardService: DashboardService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    console.log( 'setting from ', this.settingLocation);
+    console.log('setting', this.settings);
+  }
 
   onCancel() {
+    console.log('vocal modal is dismissed: ');
     this.modalController.dismiss();
+    if(this.settingLocation) {
+      this.settings.autoPlayOn = false;
+    } else {
+      this.settings.autoPlayOn = true;
+    }
+    this.dashboardService.settingSub.next(this.settings);
   }
 
   changeImage(event) {
-  console.log(event.detail.checked);
+
   this.settings.imageSetting = event.detail.checked;
-  this.dashboardService.imageSettingSub.next(this.settings.imageSetting);
+
+
   }
   changeAudioBackground(event) {
-    console.log(event.detail.checked);
+
     this.settings.audioBackgroundSetting = event.detail.checked;
-    this.dashboardService.audioBackgroundSettingSub.next(this.settings.audioBackgroundSetting);
+    // this.dashboardService.settingSub.next(this.settings);
+    // console.log(this.settings);
     }
 
-  changeAudioSpeed(event) {
+  changeSwiperSpeed(event) {
+
+    this.settings.autoPlayOn = true;
     console.log(event.detail.value);
-    this.settings.audioSpeedSetting = event.detail.value;
-    this.dashboardService.audioSpeedSettingSub.next(this.settings.audioSpeedSetting);
+
+
+    if (event.detail.value === 'Very Slow') {
+
+      this.settings.swiperSpeedSetting = '1500';
+    }
+     else if (event.detail.value === 'Slow') {
+      this.settings.swiperSpeedSetting = '800';
+
+    }
+    else if (event.detail.value === 'Normal') {
+      this.settings.swiperSpeedSetting = '300';
+
+    }
+    else if (event.detail.value === 'Fast') {
+      this.settings.swiperSpeedSetting = '100';
+
+    }
+    else if (event.detail.value === 'Very Fast') {
+      this.settings.swiperSpeedSetting = '50';
+
+    }
+
   }
+
   changeAudioVolume(event) {
-    console.log(event.detail.value);
+    this.settings.autoPlayOn = true;
     this.settings.audioVolumeSetting = event.detail.value;
-    this.dashboardService.audioVolumeSettingSub.next(this.settings.audioVolumeSetting);
+    if (event.detail.value === 'Very Low') {
+      this.settings.audioVolumeSetting = '0.1';
+    }
+
+
+    this.dashboardService.settingSub.next(this.settings);
+    console.log(this.settings);
   }
   changeTotalTest(event) {
-    console.log(event.detail.checked);
+
     this.settings.totalTestInitialization = event.detail.checked;
-    this.dashboardService.totalTestInitSub.next(this.settings.totalTestInitialization);
+    this.dashboardService.settingSub.next(this.settings);
+    console.log(this.settings);
   }
   changeToeicTest(event) {
-    console.log(event.detail.checked);
+
     this.settings.toeicTestInitialization = event.detail.checked;
-    this.dashboardService.toeicTestInitSub.next(this.settings.toeicTestInitialization);
+    this.dashboardService.settingSub.next(this.settings);
+    console.log(this.settings);
   }
   changeToeflTest(event) {
-    console.log(event.detail.checked);
+
     this.settings.toeflTestInitialization = event.detail.checked;
-    this.dashboardService.toeflTestInitSub.next(this.settings.toeflTestInitialization);
+    this.dashboardService.settingSub.next(this.settings);
+    console.log(this.settings);
   }
   changeKrSatTest(event) {
-    console.log(event.detail.checked);
+
     this.settings.krSatTestInitialization = event.detail.checked;
-    this.dashboardService.krSatTestInitSub.next(this.settings.krSatTestInitialization);
+    this.dashboardService.settingSub.next(this.settings);
+    console.log(this.settings);
   }
   changeHsTest(event) {
-    console.log(event.detail.checked);
+
     this.settings.hsTestInitialization = event.detail.checked;
-    this.dashboardService.hsTestInitSub.next(this.settings.hsTestInitialization);
+    this.dashboardService.settingSub.next(this.settings);
+    console.log(this.settings);
   }
   changeMsTest(event) {
-    console.log(event.detail.checked);
+
     this.settings.msTestInitialization = event.detail.checked;
-    this.dashboardService.msTestInitSub.next(this.settings.msTestInitialization);
+    this.dashboardService.settingSub.next(this.settings);
+    console.log(this.settings);
   }
 }
