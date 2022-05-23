@@ -46,16 +46,16 @@ export class SettingComponent implements OnInit {
   }
 
   changeImage(event) {
-
   this.settings.imageSetting = event.detail.checked;
-
-
+  console.log('Image Setting Clicked', event.detail.checked);
+  this.dashboardService.settingSub.next(this.settings);
   }
   changeAudioBackground(event) {
 
     this.settings.audioBackgroundSetting = event.detail.checked;
-    // this.dashboardService.settingSub.next(this.settings);
-    // console.log(this.settings);
+    console.log(this.settings.audioBackgroundSetting);
+    this.dashboardService.settingSub.next(this.settings);
+
     }
 
   changeSwiperSpeed(event) {
@@ -88,15 +88,29 @@ export class SettingComponent implements OnInit {
   }
 
   changeAudioVolume(event) {
-    this.settings.autoPlayOn = true;
     this.settings.audioVolumeSetting = event.detail.value;
-    if (event.detail.value === 'Very Low') {
-      this.settings.audioVolumeSetting = '0.1';
+    if (event.detail.value === '0') {
+      this.settings.audioVolumeSetting = '0.0';
+    }
+    if (event.detail.value === '20') {
+      this.settings.audioVolumeSetting = '0.2';
+    }
+    if (event.detail.value === '40') {
+      this.settings.audioVolumeSetting = '0.4';
+    }
+    if (event.detail.value === '60') {
+      this.settings.audioVolumeSetting = '0.6';
+    }
+    if (event.detail.value === '80') {
+      this.settings.audioVolumeSetting = '0.8';
+    }
+    if (event.detail.value === '100') {
+      this.settings.audioVolumeSetting = '1.0';
     }
 
-
+    console.log(this.settings.audioVolumeSetting);
     this.dashboardService.settingSub.next(this.settings);
-    console.log(this.settings);
+
   }
   changeTotalTest(event) {
 

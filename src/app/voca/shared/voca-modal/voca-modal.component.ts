@@ -53,6 +53,7 @@ export class VocaModalComponent implements OnInit, OnDestroy {
 
   player: Howl = null;                                       // howler audio 초기화
   isPlaying = false;
+  defaultAudioVolume = 0.5;   
 
   imageVocaAudioFilename = '';
 
@@ -129,7 +130,7 @@ onAudioStart(audioFilenameIndex) {
     this.player = new Howl({
       src: this.imageVocaAudioFilename,
       html5: true,
-      volume: 0.5,
+      volume: this.defaultAudioVolume,
       onPlay: () => {
         console.log('On Playing...');
         this.isPlaying = true;
