@@ -53,7 +53,7 @@ export class VocaModalComponent implements OnInit, OnDestroy {
 
   player: Howl = null;                                       // howler audio 초기화
   isPlaying = false;
-  defaultAudioVolume = 0.5;   
+  defaultAudioVolume = 0.5;
 
   imageVocaAudioFilename = '';
 
@@ -79,6 +79,19 @@ export class VocaModalComponent implements OnInit, OnDestroy {
                                                       if(this.settings.autoPlayOn) {
                                                         this.swiper.swiperRef.autoplay.start();
                                                       }
+                                                      if(this.settings.imageSetting) {
+                                                        console.log('image setting is updated', this.settings.imageSetting);
+                                                      } else {
+                                                        console.log('image setting is updated', this.settings.imageSetting);
+                                                      }
+
+                                                        console.log('audio volume setting is updated', this.settings.audioVolumeSetting);
+
+                                                      if(this.settings.audioBackgroundSetting) {
+                                                        console.log('audioBackground is updated', this.settings.audioBackgroundSetting);
+                                                      } else {
+                                                        console.log('image setting is updated', this.settings.imageSetting);
+                                                      }
                                                     });
 
     console.log(this.dayId);                               // list에 지정된 날짜
@@ -102,7 +115,6 @@ onCancel() {
     this.modalController.dismiss();
     this.settings.autoPlayOn = false;
   }
-
 
 onSetting() {
   console.log('voca modal setting clicked');
@@ -170,6 +182,7 @@ swiperSlideChanged(event) {
   console.log('current swiper Speed: ', this.swiperSpeedSet);
   this.swiper.swiperRef.params.speed = this.swiperSpeedSet;              //실제 autoplay기능의 delay(speed)값에 영향을 줌
   console.log(this.swiper.swiperRef.params.speed);
+  this.defaultAudioVolume = +(this.settings.audioVolumeSetting);
   this.onAudioStart(this.swiper.swiperRef.activeIndex);
 
 }

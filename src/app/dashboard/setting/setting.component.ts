@@ -16,7 +16,7 @@ export class SettingComponent implements OnInit {
     imageSetting: false,
     audioBackgroundSetting: false,
     swiperSpeedSetting: '300',
-    audioVolumeSetting: '60',
+    audioVolumeSetting: 0.6,
     totalTestInitialization: false,
     toeicTestInitialization: false,
     toeflTestInitialization: false,
@@ -59,59 +59,50 @@ export class SettingComponent implements OnInit {
     }
 
   changeSwiperSpeed(event) {
-
     this.settings.autoPlayOn = true;
     console.log(event.detail.value);
-
-
     if (event.detail.value === 'Very Slow') {
-
       this.settings.swiperSpeedSetting = '1500';
     }
      else if (event.detail.value === 'Slow') {
       this.settings.swiperSpeedSetting = '800';
-
     }
     else if (event.detail.value === 'Normal') {
       this.settings.swiperSpeedSetting = '300';
-
     }
     else if (event.detail.value === 'Fast') {
       this.settings.swiperSpeedSetting = '100';
-
     }
     else if (event.detail.value === 'Very Fast') {
       this.settings.swiperSpeedSetting = '50';
-
     }
 
   }
-
   changeAudioVolume(event) {
-    this.settings.audioVolumeSetting = event.detail.value;
-    if (event.detail.value === '0') {
-      this.settings.audioVolumeSetting = '0.0';
+    console.log('audio volume has been clicked:', event.detail.value);
+    if (event.detail.value === 0) {
+      this.settings.audioVolumeSetting = 0.0;
     }
-    if (event.detail.value === '20') {
-      this.settings.audioVolumeSetting = '0.2';
+    if (event.detail.value === 20) {
+      this.settings.audioVolumeSetting = 0.2;
     }
-    if (event.detail.value === '40') {
-      this.settings.audioVolumeSetting = '0.4';
+    if (event.detail.value === 40) {
+      this.settings.audioVolumeSetting = 0.4;
     }
-    if (event.detail.value === '60') {
-      this.settings.audioVolumeSetting = '0.6';
+    if (event.detail.value === 60) {
+      this.settings.audioVolumeSetting = 0.6;
     }
-    if (event.detail.value === '80') {
-      this.settings.audioVolumeSetting = '0.8';
+    if (event.detail.value === 80) {
+      this.settings.audioVolumeSetting = 0.8;
     }
-    if (event.detail.value === '100') {
-      this.settings.audioVolumeSetting = '1.0';
+    if (event.detail.value === 100) {
+      this.settings.audioVolumeSetting = 1.0;
     }
-
     console.log(this.settings.audioVolumeSetting);
     this.dashboardService.settingSub.next(this.settings);
-
   }
+
+
   changeTotalTest(event) {
 
     this.settings.totalTestInitialization = event.detail.checked;

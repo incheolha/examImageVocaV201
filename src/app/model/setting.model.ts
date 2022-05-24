@@ -4,7 +4,7 @@
                 public imageSetting: boolean,
                 public  audioBackgroundSetting: boolean,
                 public swiperSpeedSetting: string,
-                public audioVolumeSetting: string,
+                public audioVolumeSetting: number,
                 public totalTestInitialization: boolean,
                 public toeicTestInitialization: boolean,
                 public toeflTestInitialization: boolean,

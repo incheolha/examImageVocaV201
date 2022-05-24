@@ -14,7 +14,7 @@ export class DashboardService {
     imageSetting: false,
     audioBackgroundSetting: false,
     swiperSpeedSetting: '300',
-    audioVolumeSetting: '60',
+    audioVolumeSetting: 0.6,
     totalTestInitialization: false,
     toeicTestInitialization: false,
     toeflTestInitialization: false,
