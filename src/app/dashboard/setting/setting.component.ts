@@ -13,8 +13,8 @@ export class SettingComponent implements OnInit {
 
 
   settings: Setting = {
-    imageSetting: false,
-    audioBackgroundSetting: false,
+    imageSetting: true,
+    audioBackgroundSetting: true,
     swiperSpeedSetting: '300',
     audioVolumeSetting: 0.6,
     totalTestInitialization: false,

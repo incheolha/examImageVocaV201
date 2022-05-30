@@ -1,34 +1,52 @@
-<ion-content>
 
-  <div class="main_content_div">
-    <ion-buttons slot="start" class="top_btn">
-      <ion-menu-button color="light" class="menu_btn"><ion-icon name="apps"></ion-icon></ion-menu-button>
-
-      <ion-button color="light" class="menu_btn1"><ion-icon name="settings"></ion-icon></ion-button>
-
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-menu-button class="apps_div" fill="solid" color="light"><ion-icon name="apps"></ion-icon></ion-menu-button>
+      </ion-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="setting_div" (click)="onAlram()">
+        <ion-icon  name="settings-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 
-    <div class="user_div">
-      <div class="photo_div" [style.backgroundImage]="'url(assets/images/haheemang.jpg)'">
-      </div>
-
-      <div class="user_label">
-        <ion-label class="welcome"> Welcome to Image Voca</ion-label>
-        <ion-label class="username">Tony Ha</ion-label>
-        <div class="user_btn">
-          <ion-button fill="solid" size="small" class="btn1"><ion-icon name="home"></ion-icon>Dashboard</ion-button>
-          <ion-button fill="solid" size="small" class="btn2"><ion-icon name="home" ></ion-icon>Level Test</ion-button>
-        </div>
-      </div>
+  <div class="user_div">
+    <div class="first_div">
+      <ion-label class="welcome">Welcome</ion-label>
+      <ion-label class="username">Tony Ha</ion-label>
     </div>
-
-    <div class="content_div">
-      <div class="voca_title">
-
-       <h5>Exam Image Voca</h5>
-
-      </div>
+    <div class="user_back">
 
     </div>
   </div>
+
+</ion-header>
+
+<ion-content>
+
+  <div class="title-position">
+    <div class="title_button">
+          <ion-label>Welcome! DashBoard</ion-label>
+    </div>
+  </div>
+
+  <div class="menu_div animated bounceInUp">
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col role="button" size="6" (click)="onDashBoard(item)" *ngFor="let menu of levelTestMenu;">
+          <div class="col_div">
+            <img src={{menu.menuImage}}>
+            <ion-label>{{ menu.menuTitle }}</ion-label>
+          </div>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</div>
+
+
 </ion-content>

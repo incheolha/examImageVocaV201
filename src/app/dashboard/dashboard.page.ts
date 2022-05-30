@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
-import * as DashboardMenu from '../data/dashboard/dashboard.data';
 import { DashboardMenuModel } from '../model/dashboardMenu.model';
 
 import { DashboardService } from './dashboard.service';

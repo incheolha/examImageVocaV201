@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LeveltestPageRoutingModule } from './leveltest-routing.module';
 
-import { LeveltestPage } from './leveltest.page';
+import { LevelTestPage } from './leveltest.page';
 
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ import { LeveltestPage } from './leveltest.page';
     IonicModule,
     LeveltestPageRoutingModule
   ],
-  declarations: [LeveltestPage]
+  declarations: [LevelTestPage]
 })
 export class LeveltestPageModule {}

@@ -19,30 +19,37 @@
             (slideChange)="swiperSlideChanged($event)">
         <ng-template swiperSlide *ngFor="let voca of dailyVocaList; let i = index;" class="cardDiv">
 
-            <ion-card>
-            <ion-card-header>
-              <ion-img role="button"
-                      (click)="imageTaps(i)"
-                      src="assets/imageVoca/png/{{voca.filename}}.png">
-              </ion-img>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-card-title class="ion-margin-bottom">
-                    {{ voca.enWord }}{{voca.pronunciation}}
-              </ion-card-title>
-              <ion-card-subtitle >한글뜻: {{ voca.korDefinition }}</ion-card-subtitle>
-
-
-              <ion-card-subtitle class="ion-margin-top">유의어: {{ voca.enSynonyms }}</ion-card-subtitle>
-
-              <ion-card-subtitle>반대어: {{ voca.enAntonyms }}</ion-card-subtitle>
-
-              <ion-card-subtitle class="ion-margin-top">{{ voca.enExample }}</ion-card-subtitle>
-
-            </ion-card-content>
+            <ion-card *ngIf="settings.imageSetting">
+              <ion-card-header>
+                <ion-img role="button"
+                        (click)="imageTaps(i)"
+                        src="assets/imageVoca/png/{{voca.filename}}.png">
+                </ion-img>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-card-title class="ion-margin-bottom">
+                      {{ voca.enWord }}{{voca.pronunciation}}
+                </ion-card-title>
+                <ion-card-subtitle >한글뜻: {{ voca.korDefinition }}</ion-card-subtitle>
+                <ion-card-subtitle class="ion-margin-top">유의어: {{ voca.enSynonyms }}</ion-card-subtitle>
+                <ion-card-subtitle>반대어: {{ voca.enAntonyms }}</ion-card-subtitle>
+                <ion-card-subtitle class="ion-margin-top">{{ voca.enExample }}</ion-card-subtitle>
+              </ion-card-content>
             </ion-card>
-        </ng-template>
-    </swiper>
+            <ion-card *ngIf="!settings.imageSetting" >
+              <div class="no-image">
+                <h1>{{ voca.enWord }}{{voca.pronunciation}}</h1>
+              </div>
+              <ion-card-content>
+
+                <ion-card-subtitle >한글뜻: {{ voca.korDefinition }}</ion-card-subtitle>
+                <ion-card-subtitle class="ion-margin-top">유의어: {{ voca.enSynonyms }}</ion-card-subtitle>
+                <ion-card-subtitle>반대어: {{ voca.enAntonyms }}</ion-card-subtitle>
+                <ion-card-subtitle class="ion-margin-top">{{ voca.enExample }}</ion-card-subtitle>
+              </ion-card-content>
+            </ion-card>
+          </ng-template>
+      </swiper>
 
     </div>
   </div>

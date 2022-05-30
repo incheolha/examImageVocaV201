@@ -51,8 +51,10 @@ export class VocaModalComponent implements OnInit, OnDestroy {
   touchAllowed = false;
   isFirstIndex = false;
 
-  player: Howl = null;                                       // howler audio 초기화
+  player: Howl = null;                     // howler audio 초기화
+  backgroundPlayer = null;                  // audio background 초기화
   isPlaying = false;
+  isBackgroundPlaying = false;
   defaultAudioVolume = 0.5;
 
   imageVocaAudioFilename = '';
@@ -89,8 +91,10 @@ export class VocaModalComponent implements OnInit, OnDestroy {
 
                                                       if(this.settings.audioBackgroundSetting) {
                                                         console.log('audioBackground is updated', this.settings.audioBackgroundSetting);
+                                                        this.onAudioBackgroundStart(this.settings.audioBackgroundSetting);
                                                       } else {
                                                         console.log('image setting is updated', this.settings.imageSetting);
+                                                        this.onAudioBackgroundStart(this.settings.audioBackgroundSetting);
                                                       }
                                                     });
 
@@ -114,20 +118,24 @@ export class VocaModalComponent implements OnInit, OnDestroy {
 onCancel() {
     this.modalController.dismiss();
     this.settings.autoPlayOn = false;
+    if(this.settings.audioBackgroundSetting) {
+      this.backgroundPlayer.stop();
+    }
   }
 
 onSetting() {
+
+  // Setting 구성을 호출하는 기능
+
   console.log('voca modal setting clicked');
   this.swiper.swiperRef.autoplay.stop();
   this.modalController.create(
                       {component: SettingComponent,
-                       componentProps: {
-                         settingLocation: false
-                       }
+                       componentProps: {settingLocation: false}
                       }
-  ).then ( modalElement => {
-      modalElement.present();
-  });
+                      ).then ( modalElement => {
+                          modalElement.present();
+                      });
 
 
 }
@@ -156,6 +164,36 @@ onAudioStart(audioFilenameIndex) {
     this.player.play();
 }
 
+onAudioBackgroundStart(audioBackgroundSetting: boolean) {
+
+  const imageVocaAudioBackgroundFilename = 'assets/imageVoca/backgroundMp3/imagevocaBackGround.mp3';
+
+  if (audioBackgroundSetting) {
+                                    if(this.backgroundPlayer) {
+                                      this.backgroundPlayer.stop();
+                                    }
+                                    this.backgroundPlayer = new Howl({
+                                      src: imageVocaAudioBackgroundFilename,
+                                      html5: true,
+                                      volume: '0.01',
+                                      onPlay: () => {
+                                        console.log('On Background Audio Playing...');
+                                        this.isBackgroundPlaying = true;
+                                      },
+                                      onend: () => {
+                                        console.log('On Background Audio end playing...');
+
+                                      }
+                                    });
+
+                                    this.backgroundPlayer.play();
+                                } else {
+                                    if(this.backgroundPlayer) {
+                                      this.backgroundPlayer.stop();
+                                    }
+                                }
+
+}
 onSwiper(event) {
   console.log('Event clicked', event);
 
