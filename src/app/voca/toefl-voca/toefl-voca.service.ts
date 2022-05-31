@@ -15,7 +15,7 @@ export class ToeflVocaService {
   private basicToeflVocas = basicToefl.basicToeflData;
   private intermediatedToeflVocas = intermediateToefl.intermediateToeflData;
   private advancedToeflVocas = advancedToefl.advancedToeflData;
-  private actualToeflVocas = advancedToefl.advancedToeflData;
+  private actualToeflVocas = actualToefl.actualToeflData;
 
   private dailyVocaList: ImageVoca[] = [];
 
