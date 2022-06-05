@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChild, OnDestroy } from '@angular/core';
-import { Route, Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { VocaModalComponent } from '../../shared/voca-modal/voca-modal.component';
 import { ImageVoca } from '../../../model/imageVoca.model';
